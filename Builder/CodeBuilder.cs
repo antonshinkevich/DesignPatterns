@@ -5,32 +5,64 @@ namespace Builder;
 public class CodeBuilder
 {
     private const int IndentSize = 2;
-    private readonly string _className;
-    private readonly List<string> _fields;
+    private readonly List<Field> _fields;
+    private readonly CodeClass _codeClass;
 
     public CodeBuilder(string className)
     {
-        _className = className;
-        _fields = new List<string>();
+        _codeClass = new CodeClass(className);
+        _fields = new List<Field>();
     }
 
     public CodeBuilder AddField(string fieldName, string type)
     {
-        var output = new string(' ', IndentSize) +
-                     "public " + type + " " + fieldName + ";\n";
-        _fields.Add(output);
+        var field = new Field(fieldName, type);
+        _fields.Add(field);
         return this;
     }
 
     public override string ToString()
     {
-        var sb = new StringBuilder(new string($"public class {_className}\n" + "{\n"));
+        var sb = new StringBuilder(_codeClass.ToString());
+        sb.AppendLine("\n{");
         foreach (var field in _fields)
         {
-            sb.Append(field);
+            sb.Append(' ', IndentSize);
+            sb.AppendLine(field.ToString());
         }
 
         sb.Append('}');
         return sb.ToString();
+    }
+
+    class CodeClass
+    {
+        private readonly string _className;
+
+        public CodeClass(string className)
+        {
+            _className = className;
+        }
+
+        public override string ToString()
+        {
+            return "public class " + _className;
+        }
+    }
+
+    class Field
+    {
+        private readonly string _type, _fieldName;
+
+        public Field(string name, string type)
+        {
+            _fieldName = name;
+            _type = type;
+        }
+
+        public override string ToString()
+        {
+            return "public " + _type + ' ' + _fieldName + ';';
+        }
     }
 }

@@ -24,7 +24,7 @@ Console.WriteLine(element2);
 var pb = new PersonBuilder();
 Person person = pb.Lives.At("123 Green Street").In("London").WithPostcode("SW12BC")
     .Works.At("Fabrickam").AsA("Engineer").Earning(123000);
-Console.WriteLine(person);
+Console.WriteLine(person + "\n\n");
 
 // homework
 var cb = new CodeBuilder("Person").AddField("Name", "string").AddField("Age", "int");
