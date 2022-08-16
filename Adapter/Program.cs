@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Security.Principal;
+using System.Text;
 using System.Xml.Serialization;
 using Adapter;
 using Autofac;
@@ -25,11 +26,10 @@ Console.WriteLine(newStats.Capitals["France"]);
 var b = new ContainerBuilder();
 b.RegisterType<OpenCommand>().As<ICommand>().WithMetadata("Name", "Open");
 b.RegisterType<SaveCommand>().As<ICommand>().WithMetadata("Name", "Save");
-// b.RegisterType<Button>();
-// b.RegisterType<Editor>();
 b.RegisterAdapter<Meta<ICommand>, Button>(
     cmd => new Button(cmd.Value, (string) cmd.Metadata["Name"]));
 
+b.RegisterType<Editor>();
 using var c = b.Build();
 var editor = c.Resolve<Editor>();
 editor.ClickAll();
@@ -38,3 +38,12 @@ foreach (var btn in editor.Buttons)
 {
     btn.PrintMe();
 }
+
+// homework
+var square = new Square
+{
+    Side = 11
+};
+
+var rectangle = new SquareToRectangleAdapter(square);
+Console.WriteLine(rectangle.Area());
