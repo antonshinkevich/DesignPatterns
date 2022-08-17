@@ -13,4 +13,9 @@ Console.WriteLine(circle.AsString);
 var redCircle = new ColorShape(circle, "red");
 Console.WriteLine(redCircle.AsString);
 var redTransparentCircle = new TransparentShape(redCircle, 0.5f);
-Console.WriteLine(redTransparentCircle.AsString);
+Console.WriteLine(redTransparentCircle.AsString + "\n");
+
+// 4th example
+MyStringBuilder s = "Hello ";
+s += "world";
+Console.WriteLine(s);
