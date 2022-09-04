@@ -1,0 +1,18 @@
+ELEVEN BEST SOFTWARE DESIGN PATTERNS
+
+    Creational:
+Singleton
+Factory method
+Builder
+
+    Structural:
+Adapter
+Facade
+Decorator
+Proxy
+
+    Behavioral:
+State
+Strategy
+Observer
+Command
